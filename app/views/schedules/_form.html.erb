@@ -1,0 +1,31 @@
+<%= form_for(@schedule) do |f| %>
+<% if @schedule.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@schedule.errors.count, "error") %> prohibited this schedule from being saved:</h2>
+
+  <ul>
+    <% @schedule.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="form-group">
+  <%= f.label :email %><br>
+  <%= f.text_field :email, {:class => "form-control"} %>
+</div>
+<div class="form-group">
+  <%= f.label :recycle_day, "Recycle Day" %><br>
+  <%= f.text_field :recycle_day, {prompt: "What day is your Recycling Day?", class: "form-control"} %>
+</div>
+
+<div class="form-group">
+  <%= f.label :recycle_birth_week, "Is this your recycling week? (y/n)" %><br>
+  <%= f.text_field :recycle_birth_week %>
+</div>
+
+<div class="actions">
+  <%= f.submit %>
+</div>
+<% end %>
