@@ -20,6 +20,7 @@ class SchedulesController < ApplicationController
   def create
     @schedule = Schedule.new(schedule_params)
     @schedule.birthdate = Date.today
+    set_birthdate
 
     respond_to do |format|
       if @schedule.save
@@ -58,6 +59,13 @@ class SchedulesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+  def set_birthdate
+    until @schedule.birthdate.cwday == 1 
+    @schedule.birthdate -= 1
+    end
+    @schedule.save  
+  end
+  
   def set_schedule
     @schedule = Schedule.first
     if @schedule.nil?
